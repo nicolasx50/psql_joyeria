@@ -3,21 +3,6 @@ CREATE DATABASE joyeria;
 --conectar DB
 \c joyeria
 --crear tablas
---factura => cliente
-CREATE TABLE factura(
-    id_factura SERIAL,  PRIMARY KEY,
-    id_cliente SERIAL, REFERENCES id_cliente
-    productos VARCHAR(25) precio_unitario INT, 
-    cantidad INT,
-    total INT
-);
--- clientes => factura
-CREATE TABLE cliente(
-    id SERIAL, PRIMARY KEY,
-    nombre VARCHAR(25),
-    rut INT UNIQUE,
-    direccion VARCHAR(25)
-);
 --categoria => productos
 CREATE TABLE categoria(
     id SERIAL, PRIMARY KEY,
@@ -35,12 +20,27 @@ CREATE TABLE productos(
 --productos => subtotal
 CREATE TABLE subtotal(
     id_productos INT, REFERENCES id_productos,
-    id_factura INT, REFERENCES id_factura,
+    id_factura INT, REFERENCES factura,
     cantidad
 );
-INSERT INTO categoria(collares, pulseras, anillos) VALUES();
---INSERT INTO categoria(collares, pulseras, anillos) VALUES();
---INSERT INTO categoria(collares, pulseras, anillos) VALUES();
---INSERT INTO categoria(collares, pulseras, anillos) VALUES();
---INSERT INTO categoria(collares, pulseras, anillos) VALUES();
---INSERT INTO categoria(collares, pulseras, anillos) VALUES();
+--factura => cliente
+CREATE TABLE factura(
+    id_factura SERIAL,  PRIMARY KEY,
+    id_cliente SERIAL, REFERENCES cliente(id_cliente),
+    productos VARCHAR(25) precio_unitario INT, 
+    subtotal INT, 
+    total INT
+);
+-- clientes => factura
+CREATE TABLE cliente(
+    id_cliente SERIAL, PRIMARY KEY,
+    nombre VARCHAR(25),
+    rut INT UNIQUE,
+    direccion VARCHAR(25)
+);
+INSERT INTO categoria(, , ) VALUES();
+--INSERT INTO categoria(, , ) VALUES();
+--INSERT INTO categoria(, , ) VALUES();
+--INSERT INTO categoria(, , ) VALUES();
+--INSERT INTO categoria(, , ) VALUES();
+--INSERT INTO categoria(, , ) VALUES();
